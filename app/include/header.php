@@ -1,54 +1,57 @@
-<!DOCTYPE html>
-<body>
-    <header class="top-header">
-		<nav class="navbar header-nav navbar-expand-lg bg-primary ">
-            <div class="container">
-            <div class="text-left text-white">
-               <!-- Header -->
-			<header id="header" class="alt">
-				<div class="logo text-white"><h4><b>Nirmala</b> <span>Higher Secondary School</span></h4></div>
-			</header>
-            </div>
-
-            <?php if(isset($_SESSION['id'])): ?>
-                        <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
-                    <?php if($_SESSION['admin']): ?>
-                        <ul  class="navbar-nav  text-white"  style="list-style: none;">
-                            <li><a class="nav-link active text-white" href=<?php echo BASE_URL ."/home.php"?>>Home</a></li>
-                            <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/about.php"?>>About us</a></li>
-                            <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/apply.php"?>>Assist Applicant</a></li>
-                            <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/students.php"?>>Students</a></li>
-                            <li><a class="nav-link active text-white" href=<?php echo BASE_URL ."/processapplications.php"?>>Process Applications</a></li>
-                            <li><a class="nav-link text-white"><?php echo $_SESSION['username']?></a></li>
-                            <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/logout.php"?>>Logout</a></li>
-                        </ul>
-                        </div>
-                    <?php else: ?>
-                                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
-                                    <ul  class="navbar-nav  text-white"  style="list-style: none;">
-                                        <li><a class="nav-link active text-white" href=<?php echo BASE_URL ."/home.php"?>>Home</a></li>
-                                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/about.php"?>>About us</a></li>
-                                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/profile.php"?>>Profile</a></li>
-                                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/apply.php"?>>Apply now</a></li>
-                                        <li><a class="nav-link text-white"><?php echo $_SESSION['username']?></a></li>
-                                        <li><a class="nav-link text-white"></a></li>
-                                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/logout.php"?>>Logout</a></li>
-                                    </ul>
-                                </div>
-                    <?php endif;?>
-            <?php else: ?>
-                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
-                    <ul class="navbar-nav  text-white" style="list-style: none;">
-                        <li><a class="nav-link active text-white" href=<?php echo BASE_URL ."/home.php"?>>Home</a></li>
-                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/about.php"?>>About us</a></li>
-                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/login.php"?>>Login</a></li>
-                        <li><a class="nav-link text-white" href=<?php echo BASE_URL ."/register.php"?>>Register</a></li>
-                    </ul>
-                    
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="#">Nirmala School</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">          
+                <a class="nav-item nav-link" href="home.php">Home</a>
+                <a class="nav-item nav-link" href="about.php">About</a>
+          </div>
+            <!-- Navbar Right Side -->
+        <?php if(isset($_SESSION['id'])): ?> 
+          <?php if($_SESSION['admin']): ?>
+            <div class="navbar-nav">
+             <a class="nav-item nav-link" href="apply.php" style="color: White">Apply</a>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <?php echo $_SESSION['username']?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="processapplications.php"style="color: blue">Dashboard</a>
+                    <a class="dropdown-item" href="students.php"style="color: blue">Students</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="logout.php"style="color: red">Log Out</a>
+                   
                 </div>
-            <?php endif; ?>
-        </nav>
-    </header>
-
-</body>
-</html>
+                </li>
+            </div>
+          <?php else: ?> 
+                <a class="nav-item nav-link" href="apply.php" style="color: White">Apply</a>
+                <li class="nav-item dropdown" style="color:lightgrey">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"style="color: white">
+                    <?php echo $_SESSION['username']?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="profile.php"style="color: blue">Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="logout.php" style="color: red">Log Out</a>
+                </div>
+                </li>
+            </div>
+       
+        <?php endif;?>
+        <?php else: ?> 
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="login.php">Login</a>
+                <a class="nav-item nav-link" href="register.php">Sign up</a>
+            </div>
+        <?php endif;?>
+        </div>
+    </nav>
+  </header>

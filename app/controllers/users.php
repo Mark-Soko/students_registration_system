@@ -23,7 +23,7 @@ function loginUser($user){
     if($_SESSION['admin']){
         header('location: ' .BASE_URL .'/processapplications.php');
     }else{
-         header('location: ' .BASE_URL .'/home.php');
+         header('location: '.BASE_URL .'/home.php');
     }
 
     exit();
@@ -72,12 +72,6 @@ if(isset($_POST['btn_login'])){
         $password=$_POST['password'];
     }
 }
-
-
-
-
-
-
 
 
 ?>

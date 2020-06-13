@@ -1,7 +1,7 @@
 <?php
   
 define('ROOT_PATH', dirname(__FILE__));
-define('BASE_URL', 'http://localhost/AssignmentProjects/');
+define('BASE_URL', 'http://localhost/t2/');
 
 
 ?>

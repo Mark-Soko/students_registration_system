@@ -1,3 +1,7 @@
+
+
+
+
 <?php 
    include('path.php');
    require_once(ROOT_PATH .'/app/database/connect.php');
@@ -14,11 +18,11 @@
 
 */
  //profile
- $email =$_SESSION['email'];
+ $id=$_GET['V_id'];
 
- $query3 = "SELECT * from application where Email = ?";
+ $query3 = "SELECT * from application where BirthCert = ?";
  $stmt4 = $conn->prepare($query3);
- $stmt4->bind_param("s",$email);
+ $stmt4->bind_param("s",$id);
  $stmt4->execute();
  $result =$stmt4->get_result();
  $data = $result->fetch_assoc();
@@ -38,14 +42,15 @@
     <link  rel="stylesheet" type="text/css" href="assets/css/style.css">
     
 </head>
-<body >
+<body class="bg-light">
 
-<!-- Start header -->
-    <?php
-      include(ROOT_PATH  ."/app/include/header.php");
+	<!-- Start header -->
+	<?php
+      include("app/include/header.php");
     ?>
-  <!-- End header -->
-  
+	<!-- End header -->
+          
+
 <div class="container">    
     <div class="row"> 
        <div class="col-md-4 col-xs-6">
@@ -54,7 +59,7 @@
 </div>
 
 
-    <?php if($_SESSION['email']==$data['Email']): ?>
+    <?php if($id==$data['BirthCert']): ?>
       <div class="container">
     	<div class="row mt-5">
     		<div class="col-4 offset-md-4">
@@ -113,8 +118,7 @@
 <?php
       include(ROOT_PATH  ."/app/include/footer.php");
     ?>
-
-   <!-- Optional JavaScript -->
+     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -132,7 +136,6 @@
   <script src="assets/js/jquery.scrollex.min.js"></script>
   <script src="assets/js/skel.min.js"></script>
   <script src="assets/js/util.js"></script>
-  <script src="assets/js/main.js"></script>   
-   
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

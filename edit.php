@@ -4,52 +4,11 @@ include('path.php');
 require_once(ROOT_PATH .'/app/database/connect.php');
 include(ROOT_PATH  ."/app/database/db.php"); 
 
-if(isset($_POST['btn_submit'])){
-	$email =$_SESSION['email'];
-	$query1 = "SELECT * from application where Email=?";
-	$stmt4 = $conn->prepare($query1);
-	$stmt4->bind_param("s",$email);
-	$stmt4->execute();
-	$result =$stmt4->get_result();
-	$row1 = $result->fetch_assoc();
-	$email1= $row1['Email'];
-	
-	$firstname = $_POST['firstname'];
-	$middlename = $_POST['middlename'];
-	$lastname  = $_POST['lastname'];
-	$BirthCert  = $_POST['BirthCert'];
-	$level = $_POST['level'];
-	$gender = $_POST['gender'];
-	$DOB = $_POST['DOB'];
-	$grade = $_POST['grade'];
-	$email = $_POST['email'];
-	$phone = $_POST['phone'];
-	$address = $_POST['address'];
-	$ProfileImageName = time(). '_'. $_FILES['ProfileImage']['name'];
-	$target = 'assets/images/'.$ProfileImageName;
-	move_uploaded_file($_FILES['ProfileImage']['tmp_name'], $target);
+$id=$_GET['U_id'];
+$sql = "SELECT * from application WHERE BirthCert='$id'";
+$result = $conn->query($sql);
+$data = $result->fetch_assoc();
 
-	if($email==$email1){
-	echo "<p class='alert alert-danger'>You already applied.</p>";
-}else{
-$sqlApply = "INSERT INTO dirtyapplication values(?,?,?,?,?,?,?,?,?,?,?,?)";
-$insertion = $conn->prepare($sqlApply);
-$insertion->bind_param("ssssssssssss",$firstname ,$middlename,$lastname,$BirthCert,$level,$gender,$DOB,$grade,$email,$phone,$address,$ProfileImageName);
- $success=$insertion->execute();
-if(!$success){
-	header('location: ' .BASE_URL .'/home.php');
-    echo " <div class = 'alert alert-success'>Application successful</div> ";
-    exit();
-}else{
-    header('location: ' .BASE_URL .'/home.php');
-    echo " <div class = 'alert alert-success'>Application successful</div> ";
-    exit();
-}
-
-}
-
-
-}
 ?>
 
 
@@ -61,6 +20,7 @@ if(!$success){
     <title>Apply </title>
     <link  rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 	<link  rel="stylesheet" type="text/css" href="assets/css/main.css">
+	<link  rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script scr="bootstrap.min.js"></script>
     <script scr="bootstrap.js"></script> 
     <style type="text/css">
@@ -70,7 +30,6 @@ if(!$success){
     </style>
 	<script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="assets/js/script.js"></script>
-	<link  rel="stylesheet" type="text/css" href="assets/css/style.css">
 	
 
 </head>
@@ -98,15 +57,15 @@ if(!$success){
 						<h4 class="text-center bg-primary text-light p-1 rounded">Personal information</h4>
 						<div class="form-group">
 							<label for="firstname">First Name</label>
-							<input type="text" name="firstname"  class="form-control requires"placeholder="First Name">
+							<input type="text" name="firstname"  class="form-control requires"placeholder="First Name"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="middlename">Middle Name</label>
-							<input type="text" name="middlename"  class="form-control required"placeholder="Middle Name">
+							<input type="text" name="middlename"  class="form-control required"placeholder="Middle Name"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="lastname">Last Name</label>
-							<input type="text" name="lastname"  class="form-control required"placeholder="Last Name">
+							<input type="text" name="lastname"  class="form-control required"placeholder="Last Name"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<a href="#" class="btn btn-danger" id="next-1">Next</a>
@@ -125,11 +84,11 @@ if(!$success){
 
 						<div class="form-group">
 							<label for="level">Enrolment Level</label>
-							<input type="text" name="level"  class="form-control required"placeholder="Enrolment Level">
+							<input type="text" name="level"  class="form-control required"placeholder="Enrolment Level"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="BCN">Birth Certificate No.</label>
-							<input type="number" name="BirthCert"  class="form-control required"placeholder="Birth Certificate No">
+							<input type="number" name="BirthCert"  class="form-control required"placeholder="Birth Certificate No"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<a href="#" class="btn btn-danger" id="prev-2">Previous</a>
@@ -143,15 +102,15 @@ if(!$success){
 						<h4 class="text-center bg-primary text-light p-1 rounded">Personal details</h4>		
 						<div class="form-group">
 							<label for="gender">Gender</label>
-							<input type="text" name="gender"  class="form-control required"placeholder="Gender">
+							<input type="text" name="gender"  class="form-control required"placeholder="Gender"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="dob">D.O.B</label>
-							<input type="date" name="DOB"  class="form-control required"placeholder="Date of birth">
+							<input type="date" name="DOB"  class="form-control required"placeholder="Date of birth"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="gender">Grade</label>
-							<input type="text" name="grade"  class="form-control required"placeholder="Grade">
+							<input type="text" name="grade"  class="form-control required"placeholder="Grade"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						
 						<div class="form-group">
@@ -165,32 +124,32 @@ if(!$success){
 						<h4 class="text-center bg-primary text-light p-1 rounded">Contact information</h4>
 						<div class="form-group">
 							<label for="email">Email address</label>
-							<input type="email" name="email"  class="form-control required"placeholder="E-mail">
+							<input type="email" name="email"  class="form-control required"placeholder="E-mail"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="phone">Phone number</label>
-							<input type="tel" name="phone"  class="form-control required"placeholder="Parent's phone number">
+							<input type="tel" name="phone"  class="form-control required"placeholder="Parent's phone number"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<label for="address">Address</label>
-							<input type="text" name="address"  class="form-control required"placeholder="Home address">
+							<input type="text" name="address"  class="form-control required"placeholder="Home address"value="<?php echo $data['FirstName']; ?>">
 						</div>
 						<div class="form-group">
 							<a href="#" class="btn btn-danger" id="prev-4">Previous</a>
-							<button class="btn btn-success "id="btn_submit" name="btn_submit" value="btn_submit">Submit</button>
+							<button class="btn btn-success "id="btn_submit" name="btn_submit" value="btn_submit">Update</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
- 
 
-    <!-- Footer -->
+	<!-- Footer -->
 	<?php
       include(ROOT_PATH  ."/app/include/footer.php");
     ?>
 
+ 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -213,3 +172,36 @@ if(!$success){
 
 </body>
 </html>
+<?php
+if(isset($_POST['btn_submit'])){
+	$firstname = $_POST['firstname'];
+	$middlename = $_POST['middlename'];
+	$lastname  = $_POST['lastname'];
+	$BirthCert  = $_POST['BirthCert'];
+	$level = $_POST['level'];
+	$gender = $_POST['gender'];
+	$DOB = $_POST['DOB'];
+	$grade = $_POST['grade'];
+	$email = $_POST['email'];
+	$phone = $_POST['phone'];
+	$address = $_POST['address'];
+	$ProfileImageName = time(). '_'. $_FILES['ProfileImage']['name'];
+	$target = 'assets/images/'.$ProfileImageName;
+	move_uploaded_file($_FILES['ProfileImage']['tmp_name'], $target);
+
+
+    $id=$_GET['U_id'];
+    $sql = "UPDATE application SET FirstNaame='$firstname' ,MiddleName='$middlename',LastName='$lastname',BirthCert='$BirthCert',Level='$level',Gender='$gender',DOB='$DOB',Grade='$grade',Email='$email',Phone='$phone',Address='$address',Image='$ProfileImageName' WHERE BirthCert=$id";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "Record updated successfully";
+      header('location: ' .BASE_URL .'/students.php');
+    } else {
+      echo "Error updating record: " . $conn->error;
+      header('location: ' .BASE_URL .'/students.php');
+    }
+    
+    $conn->close()
+
+}
+?>

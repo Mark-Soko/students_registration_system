@@ -1,5 +1,5 @@
 <?php
-include ('path.php');
+
 session_start();
 
     unset($_SESSION['id']);
@@ -8,4 +8,4 @@ session_start();
     unset($_SESSION['message']);
     unset($_SESSION['type']);
     session_destroy();
-    header('location: ' .BASE_URL .'/home.php');
+    header('location: '.'home.php');
