@@ -368,3 +368,58 @@ body.is-loading .banner:after {
 body.is-mobile .banner>article {
 	background-attachment: scroll;
 }
+
+
+/*section 2 */
+.cover {
+	width: 100%;
+	height: 55vmin;
+	background: url("images/pic01.jpg");
+	background-position: -24rem --19rem;
+	background-size: 150%;
+	position: relative;
+}
+
+.cover .content {
+	background: rgba(0, 0, 0, 0.7);
+	height: 100%;
+	width: 100%;
+	padding-top: 19vmin;
+}
+
+.cover .content>h1 {
+	font-family: var(--Patua);
+	font-size: 6vmin;
+	color: whitesmoke;
+}
+
+.cover .content>p {
+	font-family: var(--Rubik);
+	font-size: 2vmin;
+	color: #e5e5e5;
+}
+
+.numbers .rect {
+	position: relative;
+	z-index: 1;
+	background: white;
+	width: 17rem;
+	height: 12rem;
+	padding-top: 3.5vmin;
+	margin: 1rem;
+	border-radius: 2em;
+	box-shadow: 1px 2px 50px 0px rgba(255, 0, 0, 0.349);
+}
+
+.numbers {
+	margin-top: -75px;
+}
+
+.numbers .rect h1 {
+	font-size: 5rem;
+	color: tomato;
+}
+
+.numbers .rect p {
+	font-family: var(--Patua);
+}
